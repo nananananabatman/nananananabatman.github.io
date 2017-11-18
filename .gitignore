@@ -1,0 +1,5 @@
+# ignore Node dependencies directory
+node_modules/
+
+#ignore ESLint
+.eslintrc

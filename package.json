@@ -1,0 +1,19 @@
+{
+  "name": "nananananabatman.github.io",
+  "version": "1.0.0",
+  "description": "Tetris Game",
+  "main": "scripts/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nananananabatman/nananananabatman.github.io.git"
+  },
+  "author": "AnastasiyaZakharava",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nananananabatman/nananananabatman.github.io/issues"
+  },
+  "homepage": "https://github.com/nananananabatman/nananananabatman.github.io#readme"
+}
