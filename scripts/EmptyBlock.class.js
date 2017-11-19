@@ -7,7 +7,7 @@ export class EmptyBlock {
         this.box.style.width = this.box.style.height = (boardSize / numberOfBlocks).toFixed(1) + 'px';
     }
 
-    static changeBlockStyle(blockOnPage, styleBlock) {
+    changeBlockStyle(styleBlock) {
         let elClass, color;
 
         switch(styleBlock) {
@@ -21,7 +21,7 @@ export class EmptyBlock {
         default: elClass = 'block-empty'; color = '#D8D8D8';
         }
 
-        blockOnPage.className = elClass;
-        blockOnPage.style.backgroundColor = color;
+        this.box.className = elClass;
+        this.box.style.backgroundColor = color;
     }
 }

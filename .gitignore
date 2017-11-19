@@ -1,8 +1,8 @@
 # ignore Node dependencies directory
 node_modules/
 
-#ignore ESLint
+# ignore ESLint
 .eslintrc
 
-#ignore debug logs
+# ignore debug logs
 npm-debug.log
