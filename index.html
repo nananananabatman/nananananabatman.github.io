@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./styles/index.css">
-    <script type="text/javascript" src="./dist/index.js"></script>
+    <script type="text/javascript" async src="./dist/bundle.js"></script>
     <title>Tetris Game</title>
 </head>
 <body>
     <input class="control" id="number" type="number" name="number" value="9" min="9" max="15" />
-    <button class="control" onclick="init()">start</button>
+    <button class="control" id="start">start</button>
     <div class="score-block">
         <span id="score" class="score"></span>
     </div>

@@ -1,49 +1,30 @@
-const BLOCKS = [[
-        [0, 0], [0, 1], [0, 2], [0, 3]
-    ], [
-        [0, 0], [0, 1], [0, 2],
-                        [1, 2]
-    ], [
-        [0, 0], [0, 1], [0, 2],
-        [1, 0]
-    ], [
-        [0, 0], [0, 1],
-        [1, 0], [1, 1]
-    ], [
-                [0, 1], [0, 2],
-        [1, 0], [1, 1]
-    ], [
-        [0, 0], [0, 1], [0, 2],
-                [1, 1]
-    ], [
-        [0, 0], [0, 1],
-                [1, 1], [1, 2]
-    ]],
-    GAME_BOARD_SIZE = 550,
-    MIN_SPEED = 1000,
-    SPEED_REDUCTION = 500;
+import {Element} from './Element.class';
+import {EmptyBlock} from './EmptyBlock.class';
+import {GameBoard} from './GameBoard.class';
+
+document.querySelector('#start').addEventListener('click', init);
 
 let blocksOnPage,
     elements,
     gameBoard,
     intervalID,
-    numberOfBlocks,
     score,
     scoreElement,
     speed,
-    theGameIsNotFinished;
+    theGameIsNotFinished,
+    board;
 
 function init() {
     function startGame() {
         function checkScore() {
             for (let i = 0; i < blocksOnPage.length; ++i) {
                 if(!blocksOnPage[i].map(item => item.className).includes('block-empty')) {
-                    score += numberOfBlocks;
+                    score += board.numberOfBlocks;
                     scoreElement.innerText = score;
-                    speed = speed === MIN_SPEED ? speed : speed - SPEED_REDUCTION;
+                    speed = speed === board.minSpeed ? speed : speed - board.speedReduction;
                     localStorage.setItem('currentScore', score);
                     elements.map(item => drawElement(item.block));
-                    elements.forEach(item => item.block = item.block.filter(elem => elem[0] !== i));
+                    elements.forEach(item => item.block = item.block.filter(elem => elem.coord[0] !== i));
                     elements = elements.filter(elem => elem.block.length !== 0);
                     elements.map(item => drawElement(item.block, item.index));
                 }
@@ -70,9 +51,9 @@ function init() {
         clearInterval(intervalID);
     }
 
+    board = new GameBoard();
     blocksOnPage = [];
     elements = [];
-    numberOfBlocks = checkInputValue();
     score = parseInt(localStorage.getItem('currentScore')) || 0;
     scoreElement = document.getElementById('score');
     scoreElement.innerText = score || 0;
@@ -94,93 +75,51 @@ function executeKeyDownAction(event) {
     }
 }
 
-function checkInputValue() {
-    let value = +document.querySelector('#number').value;
-
-    return value >= 9 && value <= 15 ? value : 9;
-}
-
 function drawGameBoard() {
-    function createEmptyBlock() {
-        let block = document.createElement('div');
-
-        block.className = 'block-empty';
-        block.style.width = block.style.height = GAME_BOARD_SIZE / numberOfBlocks + 'px';
-
-        return block;
-    }
-
     gameBoard = document.createElement('div');
     gameBoard.className = 'game';
 
-    for (let i = 0; i < numberOfBlocks; ++i) {
+    for (let i = 0; i < board.numberOfBlocks; ++i) {
         blocksOnPage.push([]);
-        for (let j = 0; j < numberOfBlocks; ++j) {
-            blocksOnPage[i][j] = createEmptyBlock();
+        for (let j = 0; j < board.numberOfBlocks; ++j) {
+            blocksOnPage[i][j] = (new EmptyBlock(board.gameBoardSize, board.numberOfBlocks)).box;
             gameBoard.appendChild(blocksOnPage[i][j]);
-            changeBlockStyle(blocksOnPage[i][j]);
+            EmptyBlock.changeBlockStyle(blocksOnPage[i][j]);
         }
     }
 
     document.body.appendChild(gameBoard);
 }
 
-function changeBlockStyle(blockOnPage, styleBlock) {
-    let elClass, color;
-
-    switch(styleBlock) {
-    case 0: elClass = 'block-i'; color = '#81F7F3'; break;
-    case 1: elClass = 'block-j'; color = '#8181F7'; break;
-    case 2: elClass = 'block-l'; color = '#FE9A2E'; break;
-    case 3: elClass = 'block-o'; color = '#F3F781'; break;
-    case 4: elClass = 'block-s'; color = '#81F781'; break;
-    case 5: elClass = 'block-t'; color = '#DA81F5'; break;
-    case 6: elClass = 'block-z'; color = '#F78181'; break;
-    default: elClass = 'block-empty'; color = '#D8D8D8';
-    }
-
-    blockOnPage.className = elClass;
-    blockOnPage.style.backgroundColor = color;
-}
-
 function addNewElement() {
-    let newElem = getRandomElement(),
-        pointsXOfNewElem = newElem.block.map(item => item[1]),
-        middle = Math.floor((numberOfBlocks - Math.max(...pointsXOfNewElem)) / 2);
-
-    function getRandomElement() {
-        let index = Math.floor(Math.random() * 7),
-            element = {
-                block: BLOCKS[index],
-                index
-            };
-
-        return element;
-    }
+    let newElem = new Element(),
+        pointsXOfNewElem = newElem.block.map(item => item.coord[1]),
+        middle = Math.floor((board.numberOfBlocks - Math.max(...pointsXOfNewElem)) / 2);
 
     function canAddAnotherBlock(element) {
         let canAdd = true;
 
-        element.block.forEach(item => canAdd = canAdd && tryAddBlock(item));
+        element.block.forEach(item => canAdd = canAdd && tryAddBlock(item.coord));
 
         return canAdd;
     }
 
-    function finishGame(element) {
-        theGameIsNotFinished = false;
-        clearInterval(intervalID);
-        document.removeEventListener('keydown', executeKeyDownAction);
-        element.block.map(item => changeBlockStyle(blocksOnPage[item[0]][item[1]], element.index));
-        localStorage.removeItem('currentScore');
-    }
-
-    newElem.block = newElem.block.map(item => [item[0], item[1] + middle]);
+    newElem.block = newElem.block.map(item => {
+        return {
+            box: item.box,
+            coord: [item.coord[0], item.coord[1] + middle]
+        };
+    });
 
     if (canAddAnotherBlock(newElem)) {
         elements.push(newElem);
         drawElement(elements[elements.length - 1].block, elements[elements.length - 1].index);
     } else {
-        finishGame(newElem);
+        document.removeEventListener('keydown', executeKeyDownAction);
+        newElem.paintLastElement();
+        localStorage.removeItem('currentScore');
+        theGameIsNotFinished = false;
+        clearInterval(intervalID);
     }
 }
 
@@ -194,22 +133,22 @@ function tryAddBlock(block) {
 
 function drawElement(block, index) {
     block.map(item => {
-        changeBlockStyle(blocksOnPage[item[0]][item[1]], index);
+        EmptyBlock.changeBlockStyle(blocksOnPage[item.coord[0]][item.coord[1]], index);
     });
 }
 
 function moveBlock(element, position, shift) {
     drawElement(element.block);
-    element.block.map(item => item[position] += shift);
+    element.block.map(item => item.coord[position] += shift);
     drawElement(element.block, element.index);
 }
 
 function canMoveElement(block, shift) {
-    let perhabsNewPosition = block.map(item => [item[0] + shift[0], item[1] + shift[1]]),
+    let perhabsNewPosition = block.map(item => [item.coord[0] + shift[0], item.coord[1] + shift[1]]),
         canMove = true;
 
     perhabsNewPosition.forEach(item => {
-        if (!block.map(item => item.toString()).includes(item.toString())) {
+        if (!block.map(item => item.coord.toString()).includes(item.toString())) {
             canMove = canMove && tryAddBlock(item);
         }
     });
