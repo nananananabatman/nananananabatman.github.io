@@ -2,7 +2,9 @@ let map;
 
 export class LocalStorageService {
     static addValueToStorage(name, score) {
-        map.set(name, score);
+        if(!map.has(name) || (map.has(name) && map.get(name) < score)) {
+            map.set(name, score);
+        }
     }
 
     static getFromStorage() {

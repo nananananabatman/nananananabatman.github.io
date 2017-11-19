@@ -13,6 +13,7 @@ div[class^="block-"] {
     border: 1px solid #E6E6E6;
     box-sizing: border-box;
     display: inline-block;
+    background-color: #D8D8D8;
 }
 
 .control {

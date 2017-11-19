@@ -1,10 +1,10 @@
-import {GameBoard} from './GameBoard.class';
+let width;
 
 export class EmptyBlock {
-    constructor(boardSize, numberOfBlocks) {
+    constructor() {
         this.box = document.createElement('div');
         this.box.className = 'block-empty';
-        this.box.style.width = this.box.style.height = (boardSize / numberOfBlocks).toFixed(1) + 'px';
+        this.box.style.width = this.box.style.height = width;
     }
 
     changeBlockStyle(styleBlock) {
@@ -23,5 +23,9 @@ export class EmptyBlock {
 
         this.box.className = elClass;
         this.box.style.backgroundColor = color;
+    }
+
+    static setWidth(value) {
+        width = value;
     }
 }
