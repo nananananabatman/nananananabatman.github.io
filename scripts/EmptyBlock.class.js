@@ -25,6 +25,10 @@ export class EmptyBlock {
         this.box.style.backgroundColor = color;
     }
 
+    isEmpty() {
+        return this.box.className === 'block-empty';
+    }
+
     static setWidth(value) {
         width = value;
     }

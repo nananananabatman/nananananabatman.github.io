@@ -12,11 +12,9 @@ function init() {
             for (let i = 0; i < board.blocksOnPage.length; ++i) {
                 if(!board.blocksOnPage[i].map(item => item.box.className).includes('block-empty')) {
                     board.levelup();
+                    board.elementsOnBoard.forEach(item => item.redrawElement(() => item.block = item.block.filter(elem => elem[0] !== i)));
 
-                    board.elementsOnBoard.map(item => drawElement(item.block));
-                    board.elementsOnBoard.forEach(item => item.block = item.block.filter(elem => elem[0] !== i));
                     board.elementsOnBoard = board.elementsOnBoard.filter(elem => elem.block.length !== 0);
-                    board.elementsOnBoard.map(item => drawElement(item.block, item.index));
                 }
             }
         }
@@ -67,47 +65,26 @@ function addNewElement() {
     function canAddAnotherBlock(element) {
         let canAdd = true;
 
-        element.block.forEach(item => canAdd = canAdd && tryAddBlock(item));
+        element.block.forEach(item => canAdd = canAdd && GameBoard.tryAddBlock(item));
 
         return canAdd;
-    }
-
-    function paintLastElement() {
-        newElem.block.map(item => board.blocksOnPage[item[0]][item[1]].changeBlockStyle(newElem.index));
     }
 
     newElem.block = newElem.block.map(item => [item[0], item[1] + middle]);
 
     if (canAddAnotherBlock(newElem)) {
         board.elementsOnBoard.push(newElem);
-        drawElement(board.elementsOnBoard[board.elementsOnBoard.length - 1].block,
-            board.elementsOnBoard[board.elementsOnBoard.length - 1].index);
+        board.elementsOnBoard[board.elementsOnBoard.length - 1].drawElementOnBoard(board.elementsOnBoard[board.elementsOnBoard.length - 1].index);
     } else {
         document.removeEventListener('keydown', executeKeyDownAction);
-        paintLastElement();
+        newElem.drawElementOnBoard(newElem.index);
         board.finishGame();
         clearInterval(intervalID);
     }
 }
 
-function tryAddBlock(block) {
-    try {
-        return board.blocksOnPage[block[0]][block[1]].box.className === 'block-empty';
-    } catch(err) {
-        return false;
-    }
-}
-
-function drawElement(block, index) {
-    block.map(item => {
-        board.blocksOnPage[item[0]][item[1]].changeBlockStyle(index);
-    });
-}
-
 function moveBlock(element, position, shift) {
-    drawElement(element.block);
-    element.block.map(item => item[position] += shift);
-    drawElement(element.block, element.index);
+    element.redrawElement(() => element.block.map(item => item[position] += shift));
 }
 
 function canMoveElement(block, shift) {
@@ -116,7 +93,7 @@ function canMoveElement(block, shift) {
 
     perhabsNewPosition.forEach(item => {
         if (!block.map(item => item.toString()).includes(item.toString())) {
-            canMove = canMove && tryAddBlock(item);
+            canMove = canMove && GameBoard.tryAddBlock(item);
         }
     });
 

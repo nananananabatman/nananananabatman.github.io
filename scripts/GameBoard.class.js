@@ -5,7 +5,8 @@ const GAME_BOARD_SIZE = 550,
     MIN_SPEED = 1000,
     SPEED_REDUCTION = 500;
 
-let currentScore,
+let blocksOnPage,
+    currentScore,
     currentSpeed,
     gameFinishedFlag,
     numberOfBlocks;
@@ -18,6 +19,7 @@ function checkInputValue() {
 
 
 function setInitValues() {
+    blocksOnPage = [];
     currentSpeed = 2500;
     currentScore = parseInt(LocalStorageService.getFromStorage().get('currentScore')) || 0;
     gameFinishedFlag = false;
@@ -27,12 +29,15 @@ function setInitValues() {
 
 export class GameBoard {
     constructor() {
-        this.blocksOnPage = [];
         this.elementsOnBoard = [];
         this.gameBoard;
         this.scoreElement = document.getElementById('score');
 
         setInitValues();
+    }
+
+    get blocksOnPage() {
+        return blocksOnPage;
     }
 
     get gameIsFinished() {
@@ -50,16 +55,17 @@ export class GameBoard {
     set speed(value) {
         currentSpeed = value;
     }
+
     drawGameBoard() {
         this.gameBoard = document.createElement('div');
         this.gameBoard.className = 'game';
         document.body.appendChild(this.gameBoard);
 
         for (let i = 0; i < numberOfBlocks; ++i) {
-            this.blocksOnPage.push([]);
+            blocksOnPage.push([]);
             for (let j = 0; j < numberOfBlocks; ++j) {
-                this.blocksOnPage[i][j] = new EmptyBlock(GAME_BOARD_SIZE, numberOfBlocks);
-                this.gameBoard.appendChild(this.blocksOnPage[i][j].box);
+                blocksOnPage[i][j] = new EmptyBlock(GAME_BOARD_SIZE, numberOfBlocks);
+                this.gameBoard.appendChild(blocksOnPage[i][j].box);
             }
         }
     }
@@ -79,5 +85,17 @@ export class GameBoard {
 
     updateScoreElement() {
         this.scoreElement.innerText = currentScore || 0;
+    }
+
+    static drawBlock(block, index) {
+        blocksOnPage[block[0]][block[1]].changeBlockStyle(index);
+    }
+
+    static tryAddBlock(block) {
+        try {
+            return blocksOnPage[block[0]][block[1]].isEmpty();
+        } catch(err) {
+            return false;
+        }
     }
 }
