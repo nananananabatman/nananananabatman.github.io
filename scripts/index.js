@@ -13,10 +13,10 @@ function init() {
                 if(!board.blocksOnPage[i].map(item => item.box.className).includes('block-empty')) {
                     board.levelup();
                     board.elementsOnBoard.forEach(item => item.redrawElement(() => item.block = item.block.filter(elem => elem[0] !== i)));
-
-                    board.elementsOnBoard = board.elementsOnBoard.filter(elem => elem.block.length !== 0);
                 }
             }
+
+            board.elementsOnBoard = board.elementsOnBoard.filter(elem => elem.block.length !== 0);
         }
 
         intervalID = setInterval(() => {
