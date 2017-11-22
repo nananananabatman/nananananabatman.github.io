@@ -1,4 +1,5 @@
 import {EmptyBlock} from './EmptyBlock.class';
+import {Figure} from './Figure.class';
 import {LocalStorageService} from './localStorage.service';
 
 const GAME_BOARD_SIZE = 550,
@@ -8,6 +9,8 @@ const GAME_BOARD_SIZE = 550,
 let blocksOnPage,
     currentScore,
     currentSpeed,
+    elementsOnBoard,
+    intervalID,
     gameFinishedFlag,
     numberOfBlocks;
 
@@ -17,11 +20,11 @@ function checkInputValue() {
     return value >= 9 && value <= 15 ? value : 9;
 }
 
-
 function setInitValues() {
     blocksOnPage = [];
     currentSpeed = 2500;
     currentScore = parseInt(LocalStorageService.getFromStorage().get('currentScore')) || 0;
+    elementsOnBoard = [];
     gameFinishedFlag = false;
     numberOfBlocks = checkInputValue();
     EmptyBlock.setWidth((GAME_BOARD_SIZE / numberOfBlocks).toFixed(1) + 'px');
@@ -29,31 +32,43 @@ function setInitValues() {
 
 export class GameBoard {
     constructor() {
-        this.elementsOnBoard = [];
         this.gameBoard;
         this.scoreElement = document.getElementById('score');
-
+        this.updateScoreElement();
         setInitValues();
-    }
-
-    get blocksOnPage() {
-        return blocksOnPage;
-    }
-
-    get gameIsFinished() {
-        return gameFinishedFlag;
+        this.drawGameBoard();
+        this.startGame();
     }
 
     get middle() {
         return Math.floor(numberOfBlocks / 2);
     }
 
-    get speed() {
-        return currentSpeed;
+    addNewElement() {
+        let newElem = new Figure(),
+            pointsXOfNewElem = newElem.block.map(item => item[1]),
+            middle = this.middle - Math.floor(Math.max(...pointsXOfNewElem) / 2);
+
+        newElem.block = newElem.block.map(item => [item[0], item[1] + middle]);
+
+        if (newElem.canAddToBoard()) {
+            elementsOnBoard.push(newElem);
+        } else {
+            document.removeEventListener('keydown', this.executeKeyDownAction);
+            this.finishGame();
+        }
+        newElem.drawElementOnBoard(newElem.index);
     }
 
-    set speed(value) {
-        currentSpeed = value;
+    checkScore() {
+        for (let i = 0; i < blocksOnPage.length; ++i) {
+            if(!blocksOnPage[i].map(item => item.box.className).includes('block-empty')) {
+                this.levelup();
+                elementsOnBoard.forEach(item => item.redrawElement(() => item.block = item.block.filter(elem => elem[0] !== i)));
+            }
+        }
+
+        elementsOnBoard = elementsOnBoard.filter(elem => elem.block.length !== 0);
     }
 
     drawGameBoard() {
@@ -70,9 +85,27 @@ export class GameBoard {
         }
     }
 
+    executeKeyDownAction(event) {
+        let shift,
+            element = elementsOnBoard[elementsOnBoard.length - 1];
+
+        switch(event.keyCode) {
+        case 37: shift = -1;
+            break;
+        case 39: shift = 1;
+            break;
+        default: shift = undefined;
+        }
+
+        if (shift && element.canMoveElement([0, shift])) {
+            element.moveBlock(1, shift);
+        }
+    }
+
     finishGame() {
         LocalStorageService.updateStorage();
         gameFinishedFlag = true;
+        clearInterval(intervalID);
     }
 
     levelup() {
@@ -81,6 +114,26 @@ export class GameBoard {
         this.updateScoreElement();
 
         currentSpeed = currentSpeed === MIN_SPEED ? currentSpeed : currentSpeed - SPEED_REDUCTION;
+    }
+
+    startGame() {
+        clearInterval(intervalID);
+        this.addNewElement();
+        intervalID = setInterval(() => {
+            elementsOnBoard.forEach((item, index) => {
+                if (item.canMoveElement([1, 0])) {
+                    item.moveBlock(0, 1);
+                } else {
+                    if (index === elementsOnBoard.length - 1) {
+                        this.checkScore();
+                        if (!gameFinishedFlag) {
+                            this.addNewElement();
+                        }
+                    }
+                }
+            });
+
+        }, currentSpeed);
     }
 
     updateScoreElement() {
