@@ -1,0 +1,5 @@
+BBC News -- https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=ad6861683ef144d4bff3c2770a9841f2
+Daily Mail -- https://newsapi.org/v2/top-headlines?sources=daily-mail&apiKey=ad6861683ef144d4bff3c2770a9841f2
+MTV News -- https://newsapi.org/v2/top-headlines?sources=mtv-news&apiKey=ad6861683ef144d4bff3c2770a9841f2
+National Geographic --  https://newsapi.org/v2/top-headlines?sources=national-geographic&apiKey=ad6861683ef144d4bff3c2770a9841f2
+The New York Times -- https://newsapi.org/v2/top-headlines?sources=the-new-york-times&apiKey=ad6861683ef144d4bff3c2770a9841f2

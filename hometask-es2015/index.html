@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="./styles/index.css">
+        <title>News</title>
+    </head>
+    <body>
+        <nav>
+            <button type="button" name="main-menu" id="menu" class="menu">MENU</button>
+            <ul id="sources" class="sources closed">
+                <li class="active" id="bbc"><a href="#">BBC News</a></li>
+                <li id="daily"><a href="#">Daily Mail</a></li>
+                <li id="mtv"><a href="#">MTV News</a></li>
+                <li id="nat-geo"><a href="#">National Geographic</a></li>
+                <li id="times"><a href="#">The New York Times</a></li>
+            </ul>
+        </nav>
+        <footer>
+            <p class="footer-text">Powered by <a class="footer-text__link" href="https://newsapi.org/">News API</a></p>
+        </footer>
+
+        <script type="text/javascript" src="./scripts/News.service.js"></script>
+        <script type="text/javascript" src="./scripts/Sources.js"></script>
+        <script type="text/javascript" src="./scripts/app.js" async></script>
+    </body>
+</html>
