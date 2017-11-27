@@ -10,6 +10,4 @@ function init() {
     }
 
     board = new GameBoard();
-
-    document.addEventListener('keydown', board.executeKeyDownAction);
 }

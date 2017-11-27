@@ -1,6 +1,6 @@
 import {EmptyBlock} from './EmptyBlock.class';
 import {Figure} from './Figure.class';
-import {LocalStorageService} from './localStorage.service';
+import {localStorageObject} from './localStorage';
 
 const GAME_BOARD_SIZE = 550,
     MIN_SPEED = 1000,
@@ -23,7 +23,7 @@ function checkInputValue() {
 function setInitValues() {
     blocksOnPage = [];
     currentSpeed = 2500;
-    currentScore = parseInt(LocalStorageService.getFromStorage().get('currentScore')) || 0;
+    currentScore = parseInt(localStorageObject.getFromStorage().get('currentScore')) || 0;
     elementsOnBoard = [];
     gameFinishedFlag = false;
     numberOfBlocks = checkInputValue();
@@ -54,7 +54,6 @@ export class GameBoard {
         if (newElem.canAddToBoard()) {
             elementsOnBoard.push(newElem);
         } else {
-            document.removeEventListener('keydown', this.executeKeyDownAction);
             this.finishGame();
         }
         newElem.drawElementOnBoard(newElem.index);
@@ -103,20 +102,22 @@ export class GameBoard {
     }
 
     finishGame() {
-        LocalStorageService.updateStorage();
+        document.removeEventListener('keydown', this.executeKeyDownAction);
+        localStorageObject.updateStorage();
         gameFinishedFlag = true;
         clearInterval(intervalID);
     }
 
     levelup() {
         currentScore += numberOfBlocks;
-        LocalStorageService.addValueToStorage('currentScore', currentScore);
+        localStorageObject.addValueToStorage('currentScore', currentScore);
         this.updateScoreElement();
 
         currentSpeed = currentSpeed === MIN_SPEED ? currentSpeed : currentSpeed - SPEED_REDUCTION;
     }
 
     startGame() {
+        document.addEventListener('keydown', this.executeKeyDownAction);
         clearInterval(intervalID);
         this.addNewElement();
         intervalID = setInterval(() => {

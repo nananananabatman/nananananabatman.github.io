@@ -10,6 +10,37 @@ const BLOCKS = [
     [[0, 0], [0, 1], [1, 1], [1, 2]]
 ];
 
+// const BLOCKS = [
+//     {
+//         color: '#81F7F3',
+//         blocks: [[0, 0], [0, 1], [0, 2], [0, 3]]
+//     },
+//     {
+//         color: '#8181F7',
+//         blocks: [[0, 0], [0, 1], [0, 2], [1, 2]]
+//     },
+//     {
+//         color: '#FE9A2E',
+//         blocks: [[0, 0], [0, 1], [0, 2], [1, 0]]
+//     },
+//     {
+//         color: '#F3F781',
+//         blocks: [[0, 0], [0, 1], [1, 0], [1, 1]]
+//     },
+//     {
+//         color: '#81F781',
+//         blocks: [[0, 1], [0, 2], [1, 0], [1, 1]]
+//     },
+//     {
+//         color: '#DA81F5',
+//         blocks: [[0, 0], [0, 1], [0, 2], [1, 1]]
+//     },
+//     {
+//         color: '#F78181',
+//         blocks: [[0, 0], [0, 1], [1, 1], [1, 2]]
+//     }
+// ];
+
 export class Figure {
     constructor() {
         this.index = Math.floor(Math.random() * 7),
@@ -25,10 +56,10 @@ export class Figure {
     }
 
     canMoveElement(shift) {
-        let perhabsNewPosition = this.block.map(item => [item[0] + shift[0], item[1] + shift[1]]),
+        let possibleNewPosition = this.block.map(item => [item[0] + shift[0], item[1] + shift[1]]),
             canMove = true;
 
-        perhabsNewPosition.forEach(item => {
+        possibleNewPosition.forEach(item => {
             if (!this.block.map(item => item.toString()).includes(item.toString())) {
                 canMove = canMove && GameBoard.tryAddBlock(item);
             }
@@ -45,9 +76,9 @@ export class Figure {
         this.redrawElement(() => this.block.map(item => item[position] += shift));
     }
 
-    redrawElement(filteredBlock) {
+    redrawElement(filterFunc) {
         this.drawElementOnBoard();
-        filteredBlock();
+        filterFunc();
         this.drawElementOnBoard(this.index);
     }
 }
