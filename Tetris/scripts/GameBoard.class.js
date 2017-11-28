@@ -46,28 +46,28 @@ export class GameBoard {
 
     addNewElement() {
         let newElem = new Figure(),
-            pointsXOfNewElem = newElem.block.map(item => item[1]),
+            pointsXOfNewElem = newElem.figure.blocks.map(item => item[1]),
             middle = this.middle - Math.floor(Math.max(...pointsXOfNewElem) / 2);
 
-        newElem.block = newElem.block.map(item => [item[0], item[1] + middle]);
+        newElem.figure.blocks = newElem.figure.blocks.map(item => [item[0], item[1] + middle]);
 
         if (newElem.canAddToBoard()) {
             elementsOnBoard.push(newElem);
         } else {
             this.finishGame();
         }
-        newElem.drawElementOnBoard(newElem.index);
+        newElem.drawElementOnBoard(newElem.figure.color);
     }
 
     checkScore() {
         for (let i = 0; i < blocksOnPage.length; ++i) {
-            if(!blocksOnPage[i].map(item => item.box.className).includes('block-empty')) {
+            if(!blocksOnPage[i].map(item => item.isEmpty()).includes(true)) {
                 this.levelup();
-                elementsOnBoard.forEach(item => item.redrawElement(() => item.block = item.block.filter(elem => elem[0] !== i)));
+                elementsOnBoard.forEach(item => item.redrawElement(() => item.figure.blocks = item.figure.blocks.filter(elem => elem[0] !== i)));
             }
         }
 
-        elementsOnBoard = elementsOnBoard.filter(elem => elem.block.length !== 0);
+        elementsOnBoard = elementsOnBoard.filter(elem => elem.figure.blocks.length !== 0);
     }
 
     drawGameBoard() {
@@ -141,8 +141,8 @@ export class GameBoard {
         this.scoreElement.innerText = currentScore || 0;
     }
 
-    static drawBlock(block, index) {
-        blocksOnPage[block[0]][block[1]].changeBlockStyle(index);
+    static drawBlock(block, color) {
+        blocksOnPage[block[0]][block[1]].changeBlockStyle(color);
     }
 
     static tryAddBlock(block) {
