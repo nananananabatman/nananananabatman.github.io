@@ -110,8 +110,8 @@ ul {
 }
 
 .news-item__photo {
-    max-height: 250px;
-    min-width: 100%;
+    min-height: 250px;
+    width: 100%;
 }
 
 .news-item__title {

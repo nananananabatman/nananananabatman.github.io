@@ -25,7 +25,7 @@ class App {
     }
 
     closeMenu() {
-        this.elements.sources.classList.toggle('closed');
+        document.querySelector('#sources').classList.toggle('closed');
     }
 
     generateHref() {
