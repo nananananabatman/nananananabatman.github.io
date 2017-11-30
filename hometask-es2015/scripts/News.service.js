@@ -5,13 +5,23 @@ function getUrl(src) {
 }
 
 class NewsService {
-    static async getNewsData(src) {
-        let data, request, response;
+    static getNewsData(src) {
+    let req = new Request(getUrl(src))
 
-        request = new Request(getUrl(src)),
-        response = await fetch(request),
-        data = await response.json();
-
-        return data.articles;
+        return fetch(req)
+            .then(response => response.json())
+            .then(data => data.articles);
     }
 }
+
+// class NewsService {
+//     static async getNewsData(src) {
+//         let data, request, response;
+//
+//         request = new Request(getUrl(src));
+//         response = await fetch(request),
+//         data = await response.json();
+//
+//         return data.articles;
+//     }
+// }

@@ -2,8 +2,6 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function getUrl(src) {
@@ -17,42 +15,28 @@ var NewsService = function () {
 
     _createClass(NewsService, null, [{
         key: "getNewsData",
-        value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(src) {
-                var data, request, response;
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                data = void 0, request = void 0, response = void 0;
-                                request = new Request(getUrl(src));
-                                _context.next = 4;
-                                return fetch(request);
+        value: function getNewsData(src) {
+            var req = new Request(getUrl(src));
 
-                            case 4:
-                                response = _context.sent;
-                                _context.next = 7;
-                                return response.json();
-
-                            case 7:
-                                data = _context.sent;
-                                return _context.abrupt("return", data.articles);
-
-                            case 9:
-                            case "end":
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function getNewsData(_x) {
-                return _ref.apply(this, arguments);
-            }
-
-            return getNewsData;
-        }()
+            return fetch(req).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                return data.articles;
+            });
+        }
     }]);
 
     return NewsService;
 }();
+
+// class NewsService {
+//     static async getNewsData(src) {
+//         let data, request, response;
+//
+//         request = new Request(getUrl(src));
+//         response = await fetch(request),
+//         data = await response.json();
+//
+//         return data.articles;
+//     }
+// }
