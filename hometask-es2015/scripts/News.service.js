@@ -5,11 +5,13 @@ function getUrl(src) {
 }
 
 class NewsService {
-    static getNewsData(src) {
-        let req = new Request(getUrl(src))
+    static async getNewsData(src) {
+        let data, request, response;
 
-        return fetch(req)
-            .then(response => response.json())
-            .then(data => data.articles);
+        request = new Request(getUrl(src)),
+        response = await fetch(request),
+        data = await response.json();
+
+        return data.articles;
     }
 }
