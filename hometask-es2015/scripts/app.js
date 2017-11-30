@@ -50,7 +50,7 @@ class App {
     loadData() {
         let section = document.querySelector('section');
 
-        NewsService.getNewsData(this.source.current).then(data => {
+        getNewsData(this.source.current).then(data => {
             if (section) {
                 document.body.removeChild(section);
             }
