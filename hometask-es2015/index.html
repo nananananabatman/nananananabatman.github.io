@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="./styles/index.css">
         <title>News</title>
@@ -9,17 +10,19 @@
         <nav>
             <button type="button" name="main-menu" id="menu" class="menu">MENU</button>
             <ul id="sources" class="sources closed">
-                <li class="active" id="bbc"><a href="#">BBC News</a></li>
-                <li id="daily"><a href="#">Daily Mail</a></li>
-                <li id="mtv"><a href="#">MTV News</a></li>
-                <li id="nat-geo"><a href="#">National Geographic</a></li>
-                <li id="times"><a href="#">The New York Times</a></li>
+                <li class="active bbc"><a id="bbc" href="#">BBC News</a></li>
+                <li class="daily"><a id="daily" href="#">Daily Mail</a></li>
+                <li class="mtv"><a id="mtv" href="#">MTV News</a></li>
+                <li class="nat-geo"><a id="nat-geo" href="#">National Geographic</a></li>
+                <li class="times"><a id="times" href="#">The New York Times</a></li>
             </ul>
         </nav>
         <footer>
             <p class="footer-text">Powered by <a class="footer-text__link" href="https://newsapi.org/">News API</a></p>
         </footer>
 
+        <script type="text/javascript" src="./node_modules/whatwg-fetch/fetch.js"></script>
+        <script type="text/javascript" src="./node_modules/babel-polyfill/dist/polyfill.js"></script>
         <script type="text/javascript" src="./dist/News.service.js"></script>
         <script type="text/javascript" src="./dist/Sources.js"></script>
         <script type="text/javascript" src="./dist/app.js" async></script>

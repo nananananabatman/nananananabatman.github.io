@@ -2,20 +2,21 @@
   "name": "hometask-es2015",
   "version": "1.0.0",
   "description": "FrontCamp task",
-  "main": "app.js",
+  "main": "scripts/app.js",
   "scripts": {
-    "build": "babel scripts -d dist -w"
+    "build": "babel scripts -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nananananabatman/nananananabatman.github.io"
+    "url": "git+https://github.com/nananananabatman/nananananabatman.github.io.git"
   },
   "author": "Anastasiya Zakharava",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-plugin-syntax-async-functions": "^6.13.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "whatwg-fetch": "^2.0.3"
   }
 }

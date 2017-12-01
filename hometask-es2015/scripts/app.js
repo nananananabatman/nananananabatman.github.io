@@ -17,7 +17,7 @@ class App {
         this.elements.sources.addEventListener('click', event => {
             let link = event.target.lastElementChild || event.target;
             link.href = this.generateHref();
-            if (this.source.update(event.target.closest('li').id)) {
+            if (this.source.update(event.target.id)) {
                 this.loadData();
                 this.closeMenu();
             }

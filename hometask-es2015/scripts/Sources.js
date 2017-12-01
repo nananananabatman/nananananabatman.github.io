@@ -16,7 +16,8 @@ class Source {
     }
 
     update(newVal) {
-        let newSource;
+        let newSource,
+            buttons;
 
         switch(newVal) {
         case 'daily': newSource = DAILY_MAIL;
@@ -31,9 +32,10 @@ class Source {
         }
 
         if (newSource !== selectedSrc) {
-            document.querySelectorAll('.sources li').forEach(item => item.classList.remove('active'));
+            buttons = [...document.querySelectorAll('.sources li')];
+            buttons.forEach(item => item.classList.remove('active'));
             selectedSrc = newSource;
-            document.querySelector(`#${newVal}`).classList.add('active');
+            document.querySelector(`.${newVal}`).classList.add('active');
 
             return true;
         }

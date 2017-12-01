@@ -29,7 +29,7 @@ var App = function () {
             this.elements.sources.addEventListener('click', function (event) {
                 var link = event.target.lastElementChild || event.target;
                 link.href = _this.generateHref();
-                if (_this.source.update(event.target.closest('li').id)) {
+                if (_this.source.update(event.target.id)) {
                     _this.loadData();
                     _this.closeMenu();
                 }

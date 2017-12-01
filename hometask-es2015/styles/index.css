@@ -59,7 +59,8 @@ ul {
 
 .sources li a {
     color: inherit;
-    height: 100%;
+    display: block;
+    min-height: 35px;
     text-decoration: none;
     width: 100%;
 }
