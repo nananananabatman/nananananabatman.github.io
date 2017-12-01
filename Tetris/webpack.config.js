@@ -1,5 +1,5 @@
 module.exports = {
-    entry : './scripts/index.js',
+    entry : ["babel-polyfill", './scripts/index.js'],
     output: {
         filename: './dist/bundle.js'
     },
@@ -11,9 +11,15 @@ module.exports = {
                 exclude: [/node_modules/],
                 use: [{
                     loader: 'babel-loader',
-                    options: { presets: ['es2015'] }
+                    options: { presets: [
+                        ['env', {
+                            "targets": {
+                                "browsers": ["last 2 versions", "safari >= 7"]
+                            }
+                        }]
+                    ]}
                 }]
             }
         ]
     }
-};
+}
