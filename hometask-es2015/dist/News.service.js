@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -7,7 +7,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function getUrl(src) {
-    return "https://newsapi.org/v2/top-headlines?" + ("sources=" + src + "&") + "apiKey=ad6861683ef144d4bff3c2770a9841f2";
+    return 'https://newsapi.org/v2/top-headlines?' + ('sources=' + src + '&') + 'apiKey=ad6861683ef144d4bff3c2770a9841f2';
 }
 
 var NewsService = function () {
@@ -16,7 +16,7 @@ var NewsService = function () {
     }
 
     _createClass(NewsService, null, [{
-        key: "getNewsData",
+        key: 'getNewsData',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(src) {
                 var data, response, url;
@@ -38,10 +38,10 @@ var NewsService = function () {
 
                             case 7:
                                 data = _context.sent;
-                                return _context.abrupt("return", data.articles);
+                                return _context.abrupt('return', data.articles);
 
                             case 9:
-                            case "end":
+                            case 'end':
                                 return _context.stop();
                         }
                     }

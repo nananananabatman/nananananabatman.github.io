@@ -1,3 +1,4 @@
 {
+    "plugins": ["./plugins/babel-remove-console-log-plugin.js"],
     "presets": ["env"]
 }

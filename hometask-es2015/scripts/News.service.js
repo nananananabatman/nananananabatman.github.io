@@ -8,6 +8,8 @@ class NewsService {
     static async getNewsData(src) {
         let data, response, url;
 
+        console.log('It is a News service!');
+
         url = getUrl(src);
         response = await fetch(url),
         data = await response.json();

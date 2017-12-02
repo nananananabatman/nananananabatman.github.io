@@ -50,7 +50,12 @@ class App {
     loadData() {
         let section = document.querySelector('section');
 
+        console.log('Data loading...');
+
+
         NewsService.getNewsData(this.source.current).then(data => {
+            console.log('Data loading completed!');
+
             if (section) {
                 document.body.removeChild(section);
             }

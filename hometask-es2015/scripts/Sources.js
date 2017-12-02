@@ -8,6 +8,8 @@ let selectedSrc;
 
 class Source {
     constructor() {
+        console.log('It is a Source constructor!');
+
         selectedSrc = BBC_NEWS;
     }
 

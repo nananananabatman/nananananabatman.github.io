@@ -60,6 +60,7 @@ var App = function () {
             var section = document.querySelector('section');
 
             NewsService.getNewsData(this.source.current).then(function (data) {
+
                 if (section) {
                     document.body.removeChild(section);
                 }
