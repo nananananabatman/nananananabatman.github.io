@@ -1,0 +1,26 @@
+{
+  "name": "nananananabatman.github.io",
+  "version": "1.0.0",
+  "description": "Tetris Game",
+  "main": "scripts/index.js",
+  "scripts": {
+    "build": "webpack --w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nananananabatman/nananananabatman.github.io.git"
+  },
+  "author": "AnastasiyaZakharava",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nananananabatman/nananananabatman.github.io/issues"
+  },
+  "homepage": "https://github.com/nananananabatman/nananananabatman.github.io#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.8.1"
+  }
+}

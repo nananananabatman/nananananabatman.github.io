@@ -1,0 +1,45 @@
+div {
+    margin: 0;
+    padding: 0;
+}
+
+.game {
+    font-size: 0;
+    height: 550px;
+    width: 550px;
+}
+
+div[class^="block-"] {
+    border: 1px solid #E6E6E6;
+    box-sizing: border-box;
+    display: inline-block;
+    background-color: #D8D8D8;
+}
+
+.control {
+    background-color: #fff;
+    border: 1px solid #424242;
+    box-sizing: border-box;
+    color: #424242;
+    font-family: 'Tahoma';
+    font-size: 20px;
+    height: 35px;
+    line-height: 35px;
+    margin: 15px 15px 15px 0;
+    padding: 0;
+    text-align: center;
+    width: 150px;
+}
+
+.score {
+    color: #424242;
+    font-family: 'Tahoma';
+    font-size: 30px;
+}
+
+.score-block {
+    display: inline-block;
+    margin-left: 60px;
+    text-align: right;
+    width: 150px;
+}
