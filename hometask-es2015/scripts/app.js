@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import 'babel-polyfill';
+import '../styles/index.css'
 import {NewsService} from './News.service';
 import {Source} from './Sources';
 

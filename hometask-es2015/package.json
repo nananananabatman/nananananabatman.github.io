@@ -4,7 +4,8 @@
   "description": "FrontCamp task",
   "main": "scripts/app.js",
   "scripts": {
-    "build": "webpack --w"
+    "build": "webpack --config webpack.config.prod.js",
+    "start": "webpack-dev-server --open --config webpack.config.dev.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,12 @@
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.5",
+    "style-loader": "^0.19.0",
     "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1",
     "whatwg-fetch": "^2.0.3"
   }
 }

@@ -3,7 +3,6 @@ module.exports = {
     output: {
         filename: './dist/bundle.js'
     },
-    devtool: 'inline-source-map',
     module: {
         rules: [
             {
@@ -13,6 +12,13 @@ module.exports = {
                     loader: 'babel-loader',
                     options: { presets: ['env'] }
                 }]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
             }
         ]
     }
