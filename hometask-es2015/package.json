@@ -4,7 +4,7 @@
   "description": "FrontCamp task",
   "main": "scripts/app.js",
   "scripts": {
-    "build": "babel scripts -d dist"
+    "build": "webpack --w"
   },
   "repository": {
     "type": "git",
@@ -15,8 +15,10 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0",
     "whatwg-fetch": "^2.0.3"
   }
 }

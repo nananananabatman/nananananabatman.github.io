@@ -4,7 +4,7 @@ function getUrl(src) {
         `apiKey=ad6861683ef144d4bff3c2770a9841f2`;
 }
 
-class NewsService {
+export class NewsService {
     static async getNewsData(src) {
         let data, response, url;
 

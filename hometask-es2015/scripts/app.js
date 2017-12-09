@@ -1,3 +1,8 @@
+import 'whatwg-fetch';
+import 'babel-polyfill';
+import {NewsService} from './News.service';
+import {Source} from './Sources';
+
 class App {
     constructor() {
         this.elements = {

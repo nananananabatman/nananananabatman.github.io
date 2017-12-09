@@ -6,7 +6,7 @@ const BBC_NEWS = 'bbc-news',
 
 let selectedSrc;
 
-class Source {
+export class Source {
     constructor() {
         console.log('It is a Source constructor!');
 
