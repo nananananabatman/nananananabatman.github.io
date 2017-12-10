@@ -1,11 +1,9 @@
 module.exports = function (source) {
-    let value = typeof source === "string" ? JSON.parse(source) : source;
-
-    for (let key in value) {
+    for (let key in source) {
         if (!isNaN(+key)) {
-            delete value[key];
+            delete source[key];
         }
     }
-    console.log(value);
-    return `module.exports = ${JSON.stringify(value)}`;
+
+    return source;
 };

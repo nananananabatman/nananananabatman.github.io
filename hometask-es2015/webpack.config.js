@@ -1,7 +1,7 @@
 module.exports = {
     entry : './scripts/index.js',
     output: {
-        filename: './dist/bundle.js'
+        filename: './dist/[name].js'
     },
     resolveLoader: {
         modules: ["node_modules", "loaders"]
@@ -23,7 +23,10 @@ module.exports = {
                 ]
             }, {
                 test: /\.json$/,
-                use: 'my-json-loader'
+                use: [
+                    'json-loader',
+                    'my-json-loader'
+                ]
             }
         ]
     }
