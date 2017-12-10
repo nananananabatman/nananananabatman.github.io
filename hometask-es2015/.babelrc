@@ -1,4 +1,4 @@
 {
-    "plugins": ["./plugins/babel-remove-console-log-plugin.js"],
+    "plugins": ["./plugins/babel-remove-console-log-plugin.js", "syntax-dynamic-import"],
     "presets": ["env"]
 }

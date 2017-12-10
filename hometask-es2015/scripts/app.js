@@ -1,10 +1,7 @@
-import 'whatwg-fetch';
-import 'babel-polyfill';
-import '../styles/index.css'
 import {NewsService} from './News.service';
 import {Source} from './Sources';
 
-class App {
+export default class App {
     constructor() {
         this.elements = {
             footer: document.querySelector('footer'),
@@ -74,5 +71,3 @@ class App {
         });
     }
 }
-
-new App();
