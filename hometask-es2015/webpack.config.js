@@ -3,6 +3,9 @@ module.exports = {
     output: {
         filename: './dist/bundle.js'
     },
+    resolveLoader: {
+        modules: ["node_modules", "loaders"]
+    },
     module: {
         rules: [
             {
@@ -12,13 +15,15 @@ module.exports = {
                     loader: 'babel-loader',
                     options: { presets: ['env'] }
                 }]
-            },
-            {
+            }, {
                 test: /\.css$/,
                 use: [
                     'style-loader',
                     'css-loader'
                 ]
+            }, {
+                test: /\.json$/,
+                use: 'my-json-loader'
             }
         ]
     }
