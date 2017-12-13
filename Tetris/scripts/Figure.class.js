@@ -6,7 +6,9 @@ const BLOCKS = [
     {
         center: 1,
         color: '#81F7F3',
-        blocks: [[0, 0], [0, 1], [0, 2], [0, 3]]
+        blocks: [[0, 0], [0, 1], [0, 2], [0, 3]],
+        currentPosition: 0,
+        specialRotate: true
     },
     {
         center: 1,
@@ -25,7 +27,9 @@ const BLOCKS = [
     {
         center: 0,
         color: '#81F781',
-        blocks: [[0, 1], [0, 2], [1, 0], [1, 1]]
+        blocks: [[0, 1], [0, 2], [1, 0], [1, 1]],
+        currentPosition: 0,
+        specialRotate: true
     },
     {
         center: 1,
@@ -35,7 +39,9 @@ const BLOCKS = [
     {
         center: 1,
         color: '#F78181',
-        blocks: [[0, 0], [0, 1], [1, 1], [1, 2]]
+        blocks: [[0, 0], [0, 1], [1, 1], [1, 2]],
+        currentPosition: 0,
+        specialRotate: true
     }
 ];
 
@@ -104,9 +110,18 @@ export class Figure {
     }
 
     rotateFigure() {
-        let center = this.figure.blocks[this.figure.center],
+        let angle = Math.PI / 2,
+            center = this.figure.blocks[this.figure.center],
+            currentPosition = this.figure.currentPosition,
             oldPosX, oldPosY,
             rotatedFigureBlocks;
+
+        if (this.figure.specialRotate) {
+            if (currentPosition % 2 === 1) {
+                angle = - Math.PI / 2;
+            }
+            currentPosition = (currentPosition + 1) % 4;
+        }
 
         rotatedFigureBlocks = this.figure.blocks.map(item => {
             if (item === center) {
@@ -114,11 +129,15 @@ export class Figure {
             }
             oldPosX = item[0];
             oldPosY = item[1];
-            return [(oldPosX - center[0]) * 0 - (oldPosY - center[1]) * 1 + center[0],
-                    (oldPosX - center[0]) * 1 + (oldPosY - center[1]) * 0 + center[1]];
+
+            return [(oldPosX - center[0]) * Math.cos(angle) - (oldPosY - center[1]) * Math.sin(angle) + center[0],
+                    (oldPosX - center[0]) * Math.sin(angle) + (oldPosY - center[1]) * Math.cos(angle) + center[1]];
         });
 
         if (this.isFigurePosCorrect(rotatedFigureBlocks)) {
+            if (this.figure.specialRotate) {
+                this.figure.currentPosition = currentPosition;
+            }
             this.redrawElement(() => { this.figure.blocks = rotatedFigureBlocks; });
         }
     }

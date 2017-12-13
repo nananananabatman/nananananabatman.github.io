@@ -7,7 +7,14 @@
     <title>Tetris Game</title>
 </head>
 <body>
-    <input class="control" id="number" type="number" name="number" value="9" min="9" max="15" />
+    <div class="field">
+        <label for="name" class="labels" id="name-label">Enter your name:</label>
+        <input type="text" name="name" value="" id="name-input" class="control">
+    </div>
+    <div class="field">
+        <label for="number" class="labels">Number of blocks:</label>
+        <input class="control" id="number" type="number" name="number" value="9" min="9" max="15" />
+    </div>
     <button class="control" id="start">start</button>
     <div class="score-block">
         <span id="score" class="score"></span>

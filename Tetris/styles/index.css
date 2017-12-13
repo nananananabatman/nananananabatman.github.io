@@ -6,14 +6,37 @@ div {
 .game {
     font-size: 0;
     height: 550px;
+    position: relative;
     width: 550px;
 }
 
+.finished-game {
+    background-color: rgba(46, 46, 46, 0.5);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.finished-game__heading {
+    color: rgba(230, 230, 230, 0.7);
+    font-family: Verdana;
+    font-size: 50px;
+    margin: 150px 105px;
+}
+
+.finished-game__score {
+    color: rgba(230, 230, 230, 0.7);
+    font-family: Tahoma;
+    font-size: 35px;
+    margin: 50px 95px;
+}
+
 div[class^="block-"] {
+    background-color: #D8D8D8;
     border: 1px solid #E6E6E6;
     box-sizing: border-box;
     display: inline-block;
-    background-color: #D8D8D8;
 }
 
 .control {
@@ -25,10 +48,29 @@ div[class^="block-"] {
     font-size: 20px;
     height: 35px;
     line-height: 35px;
-    margin: 15px 15px 15px 0;
     padding: 0;
     text-align: center;
     width: 150px;
+}
+
+.empty-name.labels {
+    color: #FA5858;
+}
+
+.empty-name.control {
+    border-color: #FA5858;
+}
+
+.field {
+    display: inline-block;
+    margin:  10px 15px 10px 0;
+    width: 150px;
+}
+
+.labels {
+    color: #A4A4A4;
+    font-family: Verdana;
+    font-size: 12px;
 }
 
 .score {
@@ -39,7 +81,7 @@ div[class^="block-"] {
 
 .score-block {
     display: inline-block;
-    margin-left: 60px;
+    margin-left: 10px;
     text-align: right;
-    width: 150px;
+    width: 50px;
 }

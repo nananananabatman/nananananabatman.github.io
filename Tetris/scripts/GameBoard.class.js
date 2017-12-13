@@ -3,7 +3,7 @@ import {Figure} from './Figure.class';
 import {localStorageObject} from './localStorage';
 
 const GAME_BOARD_SIZE = 550,
-    MIN_SPEED = 1000,
+    MIN_SPEED = 500,
     SPEED_REDUCTION = 500;
 
 let blocksOnPage,
@@ -13,20 +13,13 @@ let blocksOnPage,
     intervalID,
     gameFinishedFlag;
 
-function setInitValues() {
-    blocksOnPage = [];
-    currentSpeed = 2500;
-    currentScore = gameFinishedFlag !== false ? parseInt(localStorageObject.getFromStorage().get('currentScore')) || 0 : 0;
-    elementsOnBoard = [];
-    gameFinishedFlag = false;
-}
-
 export class GameBoard {
-    constructor(numberOfBlocks) {
+    constructor(numberOfBlocks, userName) {
         this.size = numberOfBlocks;
         this.scoreElement = document.getElementById('score');
+        this.userName = userName;
         this.updateScoreElement();
-        setInitValues();
+        this.setInitValues();
         this.drawGameBoard();
         this.startGame();
     }
@@ -54,7 +47,14 @@ export class GameBoard {
         for (let i = 0; i < blocksOnPage.length; ++i) {
             if(!blocksOnPage[i].map(item => item.isEmpty()).includes(true)) {
                 this.levelup();
-                elementsOnBoard.forEach(item => item.redrawElement(() => item.figure.blocks = item.figure.blocks.filter(elem => elem[0] !== i)));
+                elementsOnBoard.forEach(item => item.redrawElement(() => {
+                    item.figure.blocks = item.figure.blocks.filter(elem => elem[0] !== i);
+                    item.figure.blocks.forEach(elem => {
+                        if (elem[0] < i) {
+                            elem[0]++;
+                        }
+                    });
+                }));
             }
         }
 
@@ -64,8 +64,10 @@ export class GameBoard {
     drawGameBoard() {
         this.gameBoard = document.createElement('div');
         this.gameBoard.className = 'game';
+        this.gameBoard.tabIndex = '-1';
         document.body.appendChild(this.gameBoard);
-        EmptyBlock.setWidth((GAME_BOARD_SIZE / this.size).toFixed(1) + 'px');
+        this.gameBoard.focus();
+        EmptyBlock.setWidth((GAME_BOARD_SIZE / this.size).toFixed(2) + 'px');
 
         for (let i = 0; i < this.size; ++i) {
             blocksOnPage.push([]);
@@ -97,25 +99,52 @@ export class GameBoard {
     }
 
     finishGame() {
+        this.gameBoard.innerHTML +=
+`<div class="finished-game">` +
+    `<h3 class="finished-game__heading">GAME OVER</h3>` +
+    `<p class="finished-game__score">Your best score: ${localStorageObject.getData(this.userName) || 0}</p>` +
+`</div>`;
         document.removeEventListener('keydown', this.executeKeyDownAction);
         localStorageObject.updateStorage();
         gameFinishedFlag = true;
         clearInterval(intervalID);
+        document.getElementById('name-input').disabled = false;
     }
 
     levelup() {
         currentScore += this.size;
-        localStorageObject.addValueToStorage('currentScore', currentScore);
+        localStorageObject.addValueToStorage(this.userName, currentScore);
         this.updateScoreElement();
 
         currentSpeed = currentSpeed === MIN_SPEED ? currentSpeed : currentSpeed - SPEED_REDUCTION;
+        this.updateGameSpeed();
+    }
+
+    setInitValues() {
+        switch(gameFinishedFlag) {
+        case true:
+        case 'undefined':
+            currentScore = 0;
+            break;
+        default:
+            currentScore = parseInt(localStorageObject.getFromStorage().get('currentScore')) || 0;
+        }
+
+        blocksOnPage = [];
+        currentSpeed = 1500;
+        elementsOnBoard = [];
+        gameFinishedFlag = false;
     }
 
     startGame() {
         this.updateScoreElement();
         document.addEventListener('keydown', this.executeKeyDownAction);
-        clearInterval(intervalID);
         this.addNewElement();
+        this.updateGameSpeed();
+    }
+
+    updateGameSpeed() {
+        clearInterval(intervalID);
         intervalID = setInterval(() => {
             elementsOnBoard.forEach((item, index) => {
                 if (item.moveDown()) {
