@@ -1,17 +1,23 @@
 import {NewsService} from './News.service';
 import {Source} from './Sources';
+import {Section} from './Section';
+
+let instance;
 
 export default class App {
     constructor() {
-        this.elements = {
-            footer: document.querySelector('footer'),
+        let self = this;
+
+        self.elements = {
             menu: document.querySelector('#menu'),
             sources: document.querySelector('#sources')
         };
-        this.source = new Source();
+        self.source = new Source();
+        self.addListeners();
 
-        this.addListeners();
-        this.loadData();
+        self.execute('loadData');
+
+        App = () => self;
     }
 
     addListeners() {
@@ -21,10 +27,14 @@ export default class App {
             let link = event.target.lastElementChild || event.target;
             link.href = this.generateHref();
             if (this.source.update(event.target.id)) {
-                this.loadData();
+                this.execute('loadData');
                 this.closeMenu();
             }
         });
+    }
+
+    execute(command, ...args) {
+        return this[command](...args);
     }
 
     closeMenu() {
@@ -37,37 +47,23 @@ export default class App {
         return `#${date.getTime()}`;
     }
 
-    getArticle(newsItem) {
-        return (
-`<article class="news-item">
-    <a class="news-item__link" href="${newsItem.url}">
-        <div class="news-item__image-wrapper">
-            <img class="news-item__photo" src="${newsItem.urlToImage}" alt="">
-        </div>
-        <h2 class="news-item__title">${newsItem.title}</h2>
-        <p class="news-item__description">${newsItem.description}</p>
-    </a>
-</article>`);
-    }
-
     loadData() {
-        let section = document.querySelector('section');
+        let section;
+
+        function generateSectionWithHeader(data) {
+            let sectionElem = section.generateSection(data);
+
+            section.generateSection = () => `<h1>${data[0].source.name}</h1>` + sectionElem;
+        }
 
         console.log('Data loading...');
-
 
         NewsService.getNewsData(this.source.current).then(data => {
             console.log('Data loading completed!');
 
-            if (section) {
-                document.body.removeChild(section);
-            }
-
-            section = document.createElement('section');
-            section.className = 'news-list';
-            section.innerHTML = `<h1>${data[0].source.name}</h1>`;
-            data.forEach(item => section.innerHTML += this.getArticle(item));
-            document.body.insertBefore(section, this.elements.footer);
+            section = new Section();
+            generateSectionWithHeader(data);
+            section.updateData(data);
         });
     }
 }
