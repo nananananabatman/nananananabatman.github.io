@@ -1,0 +1,6 @@
+{"level":"error","message":"Page not found","timestamp":"12:09:10 AM"}
+{"level":"info","message":"It is a GET request for blogs","timestamp":"12:10:15 AM"}
+{"level":"info","message":"It is a GET request for blogs","timestamp":"12:11:14 AM"}
+{"level":"error","message":"Page not found","timestamp":"12:11:14 AM"}
+{"level":"info","message":"It is a GET request for 9 blog","timestamp":"12:15:46 AM"}
+{"level":"info","message":"It is a DELETE request for 7 blog","timestamp":"12:15:56 AM"}

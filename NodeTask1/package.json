@@ -1,0 +1,21 @@
+{
+  "name": "node-task1",
+  "version": "1.0.0",
+  "description": "FrontCamp3 the first task for Node and Express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nananananabatman/nananananabatman.github.io.git"
+  },
+  "author": "Anastasiya Zakharava",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.16.2",
+    "nodemon": "^1.14.11",
+    "pug": "^2.0.0-rc.4",
+    "winston": "^2.4.0"
+  }
+}
