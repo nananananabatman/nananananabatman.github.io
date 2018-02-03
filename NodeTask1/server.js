@@ -1,30 +1,10 @@
 const express = require('express');
 const fs = require('fs');
-const winston = require('winston');
+const logger = require('./log/logger');
 
-let app = express(), logger,
-    env = process.env.NODE_ENV || 'development',
+let app = express(),
     port = process.env.PORT || 8080,
     router = express.Router();
-
-function tsFormat() {
-    return (new Date()).toLocaleTimeString();
-}
-
-logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)({
-      timestamp: tsFormat,
-      colorize: true,
-      level: 'info'
-    }),
-    new (winston.transports.File)({
-      filename: 'log/results.log',
-      timestamp: tsFormat,
-      level: env === 'development' ? 'debug' : 'info'
-    })
-  ]
-});
 
 if (!fs.existsSync('log')) {
   fs.mkdirSync('log');
