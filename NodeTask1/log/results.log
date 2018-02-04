@@ -1,16 +1,8 @@
-{"level":"error","message":"Page not found","timestamp":"12:09:10 AM"}
-{"level":"info","message":"It is a GET request for blogs","timestamp":"12:10:15 AM"}
-{"level":"info","message":"It is a GET request for blogs","timestamp":"12:11:14 AM"}
-{"level":"error","message":"Page not found","timestamp":"12:11:14 AM"}
-{"level":"info","message":"It is a GET request for 9 blog","timestamp":"12:15:46 AM"}
-{"level":"info","message":"It is a DELETE request for 7 blog","timestamp":"12:15:56 AM"}
-{"level":"info","message":"It is a DELETE request for 7 blog","timestamp":"10:50:17 AM"}
-{"level":"info","message":"It is a DELETE request for 7 blog","timestamp":"11:37:19 AM"}
-{"level":"error","message":"Page not found","timestamp":"11:37:29 AM"}
-{"level":"error","message":"Page not found","timestamp":"11:37:32 AM"}
-{"level":"info","message":"It is a DELETE request for 7 blog","timestamp":"11:37:35 AM"}
-{"level":"info","message":"It is a DELETE request for 8 blog","timestamp":"11:37:39 AM"}
-{"level":"info","message":"It is a GET request for blogs","timestamp":"11:37:43 AM"}
-{"level":"info","message":"It is a GET request for blogs","timestamp":"11:37:44 AM"}
-{"level":"info","message":"It is a GET request for blogs","timestamp":"11:38:06 AM"}
-{"level":"info","message":"It is a GET request for 4 blog","timestamp":"11:38:09 AM"}
+{"level":"info","message":"It is a GET request for blogs","timestamp":"10:39:07 PM"}
+{"level":"info","message":"It is a POST request for blogs","timestamp":"10:39:31 PM"}
+{"level":"info","message":"It is a GET request for blogs","timestamp":"10:39:31 PM"}
+{"level":"info","message":"It is a GET request for 123 blog","timestamp":"10:39:54 PM"}
+{"level":"info","message":"It is a PUT request for 123 blog","timestamp":"10:40:18 PM"}
+{"level":"info","message":"It is a GET request for blogs","timestamp":"10:40:18 PM"}
+{"level":"info","message":"It is a DELETE request for 123 blog","timestamp":"10:40:30 PM"}
+{"level":"info","message":"It is a GET request for blogs","timestamp":"10:40:30 PM"}

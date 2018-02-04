@@ -1,5 +1,7 @@
 html
     head
-        title= title
+        title Blogs
     body
-        h1= message
+        for item in blogPosts
+            h3= item.title
+            p= item.text
