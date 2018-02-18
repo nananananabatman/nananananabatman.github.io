@@ -1,0 +1,36 @@
+.add-new-post {
+    margin: 30px 0;
+}
+
+.add-new-post__button,
+.add-new-post__author,
+.add-new-post__text {
+    background-color: inherit;
+    border: 1px solid #0B173B;
+    box-sizing: border-box;
+    display: block;
+    font-size: 15px;
+    font-family: 'Verdana';
+    margin: 5px 0 5px calc(50% - (560px / 2));
+    text-align: center;
+    width: 560px;
+}
+
+.add-new-post__button {
+    height: 35px
+}
+
+.add-new-post__button:hover {
+    border-color: #086A87;
+    color: #086A87;
+    cursor: pointer;
+}
+
+.add-new-post__author {
+    height: 35px;
+}
+
+.add-new-post__text {
+    height: 100px;
+    padding: 20px;
+}

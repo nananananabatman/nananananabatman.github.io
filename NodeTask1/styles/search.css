@@ -1,0 +1,31 @@
+.search__button,
+.search__input {
+    background-color: inherit;
+    border: 1px solid #0B173B;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-family: 'Verdana';
+    height: 35px;
+    margin: 5px;
+}
+
+.search__button {
+    color: #0B173B;
+    width: 100px;
+}
+
+.search__button:hover {
+    border-color: #086A87;
+    color: #086A87;
+    cursor: pointer;
+}
+
+.search__input {
+    color: #585858;
+    text-align: center;
+    width: 450px;
+}
+
+.search__wrapper {
+    text-align: center;
+}
