@@ -8,14 +8,14 @@ export default class PostForm extends React.Component {
             text;
 
         return (
-            <div className='add-new-post'>
+            <div className='form'>
                 <textarea className='add-new-post__text' placeholder='Enter post text...' ref={node => {
                     text = node;
                 }} />
-                <input className='add-new-post__author' placeholder='Enter you name...' ref={node => {
+                <input className='form-input' placeholder='Enter you name...' ref={node => {
                     author = node;
                 }} />
-                <button className='add-new-post__button' onClick={() => {
+                <button className='form-submit' onClick={() => {
                     if (author.value && text.value) {
                         addPost(author.value, text.value);
                         author.value = '';

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<article
+  className="blog-post"
+  onClick={[Function]}
+>
+  <p
+    className="blog-post__text"
+  >
+    text
+  </p>
+  <p
+    className="blog-post__author"
+  >
+    author
+  </p>
+</article>
+`;

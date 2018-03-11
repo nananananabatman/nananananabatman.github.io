@@ -1,6 +1,6 @@
 module.exports = {
     devtool: 'inline-source-map',
-    entry : './blogs/app.react.js',
+    entry : './src/app.js',
     output: {
         filename: './dist/[name].js'
     },
@@ -14,7 +14,7 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {
-                    presets: ['es2015', 'react', 'stage-0']
+                    presets: ['env', 'react', 'stage-0']
                 }
             }
         ]
