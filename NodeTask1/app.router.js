@@ -40,7 +40,7 @@ router.route('/api/login')
                 res.send(err);
             }
 
-            res.send({user: user.name});
+            res.send({user: user ? user.name : ''});
         });
     });
 
@@ -56,12 +56,10 @@ router.route('/api/signup')
             }
 
             if (!userRes) {
-                console.log('Hmm...');
                 user.create({
                     name: req.body.name,
                     pass: req.body.pass
                 }, (error, result) => {
-                    console.log(result);
                     if (error) {
                         res.send(error);
                     }
@@ -76,7 +74,6 @@ router.route('/api/signup')
 
 router.route('/api/blogs')
     .delete((req, res) => {
-        console.log(req.body);
         logger.info('It is a DELETE request for ' + req.body.blogId + ' blog');
 
         blog.remove({

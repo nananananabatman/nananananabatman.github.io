@@ -34,3 +34,45 @@ body {
     font-size: 17px;
     margin: 0 0 10px;
 }
+
+.sign-up {
+    height: 25px;
+    margin: 20px 0 5px calc(50% - (200px / 2));
+    width: 200px;
+}
+
+.header {
+    display: block;
+    text-align: right;
+}
+
+.header-button {
+    background-color: inherit;
+    border: 1px solid #0B173B;
+    font-size: 12px;
+    height: 20px;
+    margin: 0 20px 20px;
+    text-align: center;
+    width: auto;
+}
+
+.header-button:hover {
+    border-color: #086A87;
+    color: #086A87;
+    cursor: pointer;
+}
+
+.user-name {
+    color: #086A87;
+    font-family: 'Tahoma';
+    font-size: 12px;
+}
+
+.error {
+    color: #610B0B;
+    font-family: 'Tahoma';
+    font-size: 10px;
+    font-style: italic;
+    margin: 10px;
+    text-align: center;
+}

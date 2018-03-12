@@ -1,31 +1,33 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
-async function callApi(name, pass) {
-    const response = await fetch('/api/login', {
-        method: 'PUT',
-        body: JSON.stringify({name: name, pass: pass}),
-        headers: {"Content-Type": "application/json"}
-    });
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-}
+import ErrorMsg from './error.component';
+import blogService from './blogs-api.service';
 
 class Login extends React.Component {
     checkLogin(name, pass) {
-        callApi(name, pass)
+        blogService.sendRequest({url: '/api/login', method: 'PUT', body: JSON.stringify({name: name, pass: pass})})
             .then(res => {
-                this.props.dispatch({
-                    type: 'LOGIN',
-                    user: res.user
-                });
-                localStorage.setItem('currentUser', res.user);
-                this.props.history.push('/');
+                if (res.user) {
+                    this.props.dispatch({
+                        type: 'LOGIN',
+                        user: res.user
+                    });
+                    this.props.dispatch({type: 'CLEAR_ERROR'});
+                    localStorage.setItem('currentUser', res.user);
+                    this.props.history.push('/');
+                } else {
+                    this.props.dispatch({
+                        type: 'ERROR',
+                        message: 'Invalid login or password, please try again'
+                    });
+                }
             })
             .catch(err => console.log(err));
+    }
+
+    openMainPage() {
+        this.props.history.push('/');
     }
 
     render() {
@@ -33,10 +35,12 @@ class Login extends React.Component {
 
         return (
             <div className='form'>
+                <span className="header"><button className="header-button" onClick={this.openMainPage.bind(this)}>Return to Main Page</button></span>
+                <ErrorMsg />
                 <input className='form-input' placeholder='Enter your name...' ref={node => {
                     name = node;
                 }} />
-                <input className='form-input' placeholder='Enter your password...' ref={node => {
+                <input className='form-input' placeholder='Enter your password...' type="password" ref={node => {
                     pass = node;
                 }} />
                 <button className='form-submit' onClick={() => {
@@ -46,9 +50,9 @@ class Login extends React.Component {
                         pass.value = '';
                     }
                 }}>Log In</button>
-                <button onClick={() => {
+                <button className='form-submit sign-up' onClick={() => {
                     this.props.history.push('signup');
-                }}>Sign Up</button>
+                }}>Sign Up ></button>
             </div>
         );
     }
