@@ -1,0 +1,16 @@
+<button type="button" name="addTask" ng-click="allTasksCtrl.addTask()">Add Task</button>
+<label for="search-text">Search by first letter</label>
+<input type="text" name="text" id="search-text" ng-change="allTasksCtrl.onTextChange()" ng-model="allTasksCtrl.letter" />
+<label for="search-date">Search by date</label>
+<input type="date" name="date" id="search-date" ng-change="allTasksCtrl.onDateChange()" ng-model="allTasksCtrl.date" />
+<section class="todo">
+    <tasks-list list="allTasksCtrl.filteredList.newTasks"
+                update-task-status="allTasksCtrl.updateTaskStatus(id)"
+                tasks-title="New todos"
+                new-tasks="true">
+    </tasks-list>
+    <tasks-list list="allTasksCtrl.filteredList.doneTasks"
+                update-task-status="allTasksCtrl.updateTaskStatus(id)"
+                tasks-title="Done todos">
+    </tasks-list>
+</section>

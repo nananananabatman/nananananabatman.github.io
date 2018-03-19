@@ -1,0 +1,4 @@
+<h2 class="heading">{{ $ctrl.heading }}</h2>
+<label for="task-new-text">Enter a text for task:</label>
+<input type="text" name="newText" ng-model="$ctrl.text" required min-length />
+<button ng-click="$ctrl.onTextChange()">Save</button>

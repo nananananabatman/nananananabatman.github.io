@@ -1,0 +1,77 @@
+body {
+    background-color: #EFF2FB;
+    color: #140718;
+    font-family: 'Tahoma';
+}
+
+.error {
+    color: #B40404;
+    display: block;
+    font-size: 10px;
+    font-style: italic;
+    margin: -10px 50px 0;
+}
+
+.add-button, .button, .heading, .input, .label {
+    display: block;
+    margin: 10px 50px;
+}
+
+.add-button, .button, .input {
+    border: 1px solid #140718;
+}
+
+.button {
+    height: 20px;
+    width: 100px;
+}
+
+.add-button:hover, .button:hover {
+    background-color: #FAFAFA;
+    border-color: #5F04B4;
+    color: #5F04B4;
+    cursor: pointer;
+}
+
+.button[disabled] {
+    background-color: #ffffff;
+    border-color: #BDBDBD;
+    color: #BDBDBD;
+}
+
+.button[disabled]:hover {
+    cursor: default;
+}
+
+.input {
+    border: 1px solid #140718;
+    height: 25px;
+    width: 450px;
+}
+
+.input.ng-invalid {
+    border-color: #B40404;
+}
+
+.input.ng-valid {
+    border-color: #0B6121;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.add-button {
+    font-size: 15px;
+    height: 25px;
+    width: 250px;
+}
+
+.tasks-list {
+    box-sizing: border-box;
+    display: inline-block;
+    float: left;
+    margin-top: 25px;
+    padding: 10px 20px;
+    width: 50%;
+}

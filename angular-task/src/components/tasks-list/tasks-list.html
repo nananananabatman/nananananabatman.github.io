@@ -1,0 +1,14 @@
+<h2 class="heading">{{ tasksListCtrl.tasksTitle }}</h2>
+<span ng-if="tasksListCtrl.newTasks">
+    <label class="label" for="days-field">Enter the number of days to filter tasks:</label>
+    <input class="input" type="number" min="0" id="days-field" ng-model="tasksListCtrl.daysFilter" ng-change="tasksListCtrl.onDaysChange()" />
+</span>
+<article class="tasks-list"
+         ng-repeat="task in tasksListCtrl.daysFilter ? tasksListCtrl.filteredList : tasksListCtrl.list">
+    <input type="checkbox" ng-checked="task.done" ng-click="tasksListCtrl.updateStatus(task.id)" />
+    <h3 class="task-heading"
+        ng-click="tasksListCtrl.onTaskClick(task.id)">
+        {{ task.text }}
+    </h3>
+    <span class="task-date">{{ task.date }}</span>
+</article>
