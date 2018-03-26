@@ -1,7 +1,7 @@
 function AppService($resource) {
     let list;
 
-    function addNewTask(task) {
+    function addNewArticle(task) {
         list.push(task);
     }
 
@@ -10,18 +10,14 @@ function AppService($resource) {
     }
 
     function getListPromise() {
-        return $resource('./todo.json').get().$promise.then(data => {
+        return $resource('./articles.json').get().$promise.then(data => {
             list = data.array
 
             return list;
         });
     }
 
-    function getStringDate(date) {
-        return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-    }
-
-    function getTaskById(id) {
+    function getArticleById(id) {
         return list.find(item => item.id === id);
     }
 
@@ -29,25 +25,20 @@ function AppService($resource) {
         return !!list;
     }
 
-    function updateTaskStatus(id) {
-        let task = getTaskById(id);
+    function updateArticle(id, newTitle, newContent) {
+        let article = list.find(item => item.id === id);
 
-        task.done = !task.done;
-    }
-
-    function updateTaskText(id, newText) {
-        list.find(item => item.id === id).text = newText;
+        article.title = newTitle;
+        article.content = newContent;
     }
 
     return {
-        addNewTask: addNewTask,
+        addNewArticle: addNewArticle,
         getList: getList,
         getListPromise: getListPromise,
-        getStringDate: getStringDate,
-        getTaskById: getTaskById,
+        getArticleById: getArticleById,
         isListExists: isListExists,
-        updateTaskStatus: updateTaskStatus,
-        updateTaskText: updateTaskText
+        updateArticle: updateArticle
     };
 }
 

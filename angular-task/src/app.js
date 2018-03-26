@@ -1,39 +1,39 @@
 let angular = require('angular'),
-    AddTaskController = require('./controllers/add-task.controller'),
-    AllTasksController = require('./controllers/all-tasks.controller'),
+    AddArticleController = require('./controllers/add-article.controller'),
+    AllArticlesController = require('./controllers/all-articles.controller'),
     AppService = require('./app.service'),
-    EditTaskController = require('./controllers/edit-task.controller'),
+    EditArticleController = require('./controllers/edit-article.controller'),
     MinLengthDirective = require('./directives/min-length.directive');
 
 require('angular-resource');
 require('angular-route');
-require('./components/tasks-list/tasks-list.module');
+require('./components/articles-list/articles-list.module');
 
 angular
-    .module('app', ['ngResource', 'ngRoute', 'tasksListModule'])
+    .module('app', ['ngResource', 'ngRoute', 'articlesListModule'])
     .config(function($routeProvider) {
         $routeProvider
             .when('/', {
-                template: require('./templates/all-tasks.html'),
-                controller: 'AllTasksController',
-                controllerAs: 'allTasksCtrl'
+                template: require('./templates/all-articles.html'),
+                controller: 'AllArticlesController',
+                controllerAs: 'allArticlesCtrl'
             })
             .when('/add', {
-                template: require('./templates/add-edit-task.html'),
-                controller: 'AddTaskController',
+                template: require('./templates/add-edit-article.html'),
+                controller: 'AddArticleController',
                 controllerAs: '$ctrl'
             })
             .when('/:id/edit', {
-                template: require('./templates/add-edit-task.html'),
-                controller: 'EditTaskController',
+                template: require('./templates/add-edit-article.html'),
+                controller: 'EditArticleController',
                 controllerAs: '$ctrl'
             });
     })
-    .controller('AddTaskController', AddTaskController)
-    .controller('AllTasksController', AllTasksController)
-    .controller('EditTaskController', EditTaskController)
+    .controller('AddArticleController', AddArticleController)
+    .controller('AllArticlesController', AllArticlesController)
+    .controller('EditArticleController', EditArticleController)
     .directive('minLength', MinLengthDirective)
-    .factory('todoService', AppService);
+    .factory('articleService', AppService);
 
 angular.element(document).ready(function bootstrap() {
     angular.bootstrap(document, ['app']);

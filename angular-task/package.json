@@ -1,5 +1,5 @@
 {
-  "name": "ToDo-List",
+  "name": "Articles-List",
   "version": "1.0.0",
   "description": "FrontCamp3 AngularJS task",
   "main": "./app.server.js",
@@ -24,8 +24,8 @@
     "webpack": "^3.11.0"
   },
   "dependencies": {
-    "angular": "1.5.6",
-    "angular-route": "1.5.6",
+    "angular": "1.6.1",
+    "angular-route": "1.6.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongoose": "^5.0.3"

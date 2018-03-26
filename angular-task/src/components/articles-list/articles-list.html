@@ -1,0 +1,11 @@
+<section class="article">
+    <article class="articles-list"
+             ng-repeat="article in articlesListCtrl.page"
+             ng-click="articlesListCtrl.onArticleClick(article.id)">
+        <h3 class="article-heading">
+            {{ article.title }}
+        </h3>
+        <p>{{ article.content }}</p>
+    </article>
+</section>
+<paginator class="pagination" update-page="articlesListCtrl.onPageUpdate(indices)" articles-count="articlesListCtrl.list.length"></paginator>

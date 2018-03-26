@@ -1,0 +1,14 @@
+<h2 class="heading">{{ $ctrl.heading }}</h2>
+<form name="addEditForm">
+    <label class="label" for="article-new-text">Enter a title for article:</label>
+    <input class="input" type="text" name="newTitle" ng-model="$ctrl.title" required min-length />
+    <label class="error" ng-if="!addEditForm.newTitle.$valid">The min length of text is 20 symbols</label>
+    <label class="label" for="article-new-text">Enter a title for article:</label>
+    <textarea class="input textarea" type="text" name="newContent" ng-model="$ctrl.content" required></textarea>
+    <label class="error" ng-if="!addEditForm.newContent.$valid">Please enter an article content</label>
+    <button class="button"
+            ng-click="$ctrl.onArticleChange()"
+            ng-disabled="!addEditForm.newTitle.$valid || !addEditForm.newContent.$valid">
+        Save
+    </button>
+</form>

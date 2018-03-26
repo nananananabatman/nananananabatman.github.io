@@ -1,7 +1,0 @@
-<h2 class="heading">{{ $ctrl.heading }}</h2>
-<form name="addEditForm">
-    <label class="label" for="task-new-text">Enter a text for task:</label>
-    <input class="input" type="text" name="newText" ng-model="$ctrl.text" required min-length />
-    <label class="error" ng-if="!addEditForm.newText.$valid">The min length of text is 20 symbols</label>
-    <button class="button" ng-click="$ctrl.onTextChange()" ng-disabled="!addEditForm.newText.$valid">Save</button>
-</form>
