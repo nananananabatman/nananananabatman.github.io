@@ -5,11 +5,13 @@ module.exports = function(config) {
 		basePath: '.',
 		frameworks: ['jasmine'],
 		files: [
+			{pattern: 'src/**/*.js', watched: false},
 			{pattern: 'test/**/*.js', watched: false},
 			{pattern: 'src/**/*.html', watched: false}
 		],
 		reporters: ['progress', 'coverage'],
 		preprocessors: {
+			'src/**/*.js': ['webpack', 'sourcemap'],
 			'test/**/*.js': ['webpack', 'sourcemap'],
 			'**/*.html': ['ng-html2js']
 		},

@@ -5,6 +5,7 @@
   "main": "./app.server.js",
   "scripts": {
     "build": "webpack --watch",
+    "mutate": "node_modules/.bin/stryker run",
     "start": "nodemon ./app.server.js",
     "test": "karma start"
   },
@@ -33,6 +34,11 @@
     "karma-requirejs": "1.1.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "2.0.3",
+    "stryker": "^0.6.1",
+    "stryker-api": "^0.5.0",
+    "stryker-html-reporter": "^0.4.1",
+    "stryker-jasmine": "^0.2.1",
+    "stryker-karma-runner": "^0.4.0",
     "webpack": "2.2.1"
   },
   "dependencies": {

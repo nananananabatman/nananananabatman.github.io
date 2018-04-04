@@ -1,0 +1,1 @@
+{"path":"/Users/anastasiazaharova/Desktop/nananananabatman.github.io/angular-task/src/components/paginator/paginator.module.js","content":"var angular = require('angular'),\n    paginatorComponent = require('./paginator.component');\n\nmodule.exports = angular\n    .module('paginatorModule', [])\n    .component(paginatorComponent.name, paginatorComponent);\n"}
