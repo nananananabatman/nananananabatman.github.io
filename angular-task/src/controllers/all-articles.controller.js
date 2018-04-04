@@ -1,5 +1,5 @@
 function AllArticlesController($location, articleService) {
-    let vm = this;
+    var vm = this;
 
     function addArticle() {
         $location.path('/add');
@@ -9,7 +9,7 @@ function AllArticlesController($location, articleService) {
         if (articleService.isListExists()) {
             vm.articleList = articleService.getList();
         } else {
-            articleService.getListPromise().then(data => {
+            articleService.getListPromise().then(function(data) {
                 vm.articleList = data;
             })
         };

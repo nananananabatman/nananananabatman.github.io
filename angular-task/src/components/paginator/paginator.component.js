@@ -1,13 +1,13 @@
-const ELEMENTS_ON_PAGE = 5;
+var ELEMENTS_ON_PAGE = 5;
 
 function PaginatorController($timeout) {
-    let vm = this;
+    var vm = this;
 
     function onInit() {
         vm.pages = [];
 
-        $timeout(() => {
-            for (let i = 0; i < Math.ceil(vm.articlesCount / ELEMENTS_ON_PAGE); ++i) {
+        $timeout(function() {
+            for (var i = 0; i < Math.ceil(vm.articlesCount / ELEMENTS_ON_PAGE); ++i) {
                 vm.pages.push({
                     startIndex: i * ELEMENTS_ON_PAGE,
                     endIndex: i * ELEMENTS_ON_PAGE + ELEMENTS_ON_PAGE

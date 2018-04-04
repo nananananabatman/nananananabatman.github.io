@@ -1,5 +1,5 @@
 function AddArticleController($location, articleService) {
-    let vm = this;
+    var vm = this;
 
     function onArticleChange() {
         articleService.addNewArticle({

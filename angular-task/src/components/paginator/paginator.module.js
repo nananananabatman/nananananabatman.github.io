@@ -1,4 +1,4 @@
-let angular = require('angular'),
+var angular = require('angular'),
     paginatorComponent = require('./paginator.component');
 
 module.exports = angular

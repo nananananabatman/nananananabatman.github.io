@@ -9,7 +9,7 @@ require('angular-resource');
 require('angular-route');
 require('./components/articles-list/articles-list.module');
 
-angular
+module.exports = angular
     .module('app', ['ngResource', 'ngRoute', 'articlesListModule'])
     .config(function($routeProvider) {
         $routeProvider
